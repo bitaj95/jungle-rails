@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160625062916) do
+ActiveRecord::Schema.define(version: 20220204054703) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,12 @@ ActiveRecord::Schema.define(version: 20160625062916) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "choices", force: :cascade do |t|
+    t.integer "poll_id",                 null: false
+    t.string  "title",       limit: 255, null: false
+    t.text    "description"
   end
 
   create_table "line_items", force: :cascade do |t|
@@ -35,12 +41,25 @@ ActiveRecord::Schema.define(version: 20160625062916) do
   add_index "line_items", ["order_id"], name: "index_line_items_on_order_id", using: :btree
   add_index "line_items", ["product_id"], name: "index_line_items_on_product_id", using: :btree
 
+  create_table "names", force: :cascade do |t|
+    t.string "name", limit: 255, null: false
+  end
+
   create_table "orders", force: :cascade do |t|
     t.integer  "total_cents"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
     t.string   "stripe_charge_id"
     t.string   "email"
+  end
+
+  create_table "polls", force: :cascade do |t|
+    t.string  "email_address", limit: 255, null: false
+    t.text    "question",                  null: false
+    t.string  "admin_link",    limit: 255, null: false
+    t.string  "poll_link",     limit: 255, null: false
+    t.boolean "is_active",                 null: false
+    t.boolean "anonymous",                 null: false
   end
 
   create_table "products", force: :cascade do |t|
@@ -56,7 +75,24 @@ ActiveRecord::Schema.define(version: 20160625062916) do
 
   add_index "products", ["category_id"], name: "index_products_on_category_id", using: :btree
 
+  create_table "users", force: :cascade do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "password_digest"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  create_table "votes", force: :cascade do |t|
+    t.integer "choice_id",   null: false
+    t.integer "vote_weight", null: false
+    t.integer "name_id",     null: false
+  end
+
+  add_foreign_key "choices", "polls", name: "choices_poll_id_fkey", on_delete: :cascade
   add_foreign_key "line_items", "orders"
   add_foreign_key "line_items", "products"
   add_foreign_key "products", "categories"
+  add_foreign_key "votes", "choices", name: "votes_choice_id_fkey", on_delete: :cascade
+  add_foreign_key "votes", "names", name: "votes_name_id_fkey", on_delete: :cascade
 end
