@@ -60,7 +60,7 @@ RSpec.describe User, type: :model do
       @user2 = User.authenticate_with_credentials('different-email@mail.com', 'Aardvark123')
       expect(@user2).to be nil
     end
-
+    
     it 'is not valid with the wrong password' do
       @user = User.new(name: "Arthur", email: "test@mail.com", password: "Aardvark123", password_confirmation: "Aardvark123")
       expect(@user).to be_valid
@@ -68,5 +68,15 @@ RSpec.describe User, type: :model do
       @user2 = User.authenticate_with_credentials('test@mail.com', 'Aard123')
       expect(@user2).to be nil
     end
+
+    it 'is valid if a visitor types in the wrong case for their emai' do
+      @user = User.new(name: "Arthur", email: "test@mail.com", password: "Aardvark123", password_confirmation: "Aardvark123")
+      expect(@user).to be_valid
+      @user.save
+      @user2 = User.authenticate_with_credentials('TEST@mail.com', 'Aardvark123')
+      expect(@user2).to_not be nil
+    end
+    
+    
   end
 end

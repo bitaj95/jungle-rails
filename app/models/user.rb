@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
 
   # Check if the user exists and if the password correct
   def self.authenticate_with_credentials(email, password)
-    @user = User.find_by(email: email).try(:authenticate, password)
+    @user = User.find_by(email: email.downcase).try(:authenticate, password)
     if @user
       @user
     else
