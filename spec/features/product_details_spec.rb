@@ -21,7 +21,7 @@ RSpec.feature "Users can navigate from the home page to the product detail page"
   scenario "They see product detail page" do
     # ACT
     visit root_path
-    # first('.actions').click_on('Details')
+    #first('.actions').click_on('Details')
     page.find('.products').first(:link,'Details').click 
     sleep 5
     puts page.html
