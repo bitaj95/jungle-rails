@@ -2,7 +2,7 @@
 
 A mini e-commerce application built with Rails 4.2 for purposes of teaching Rails by example.
 
-##Features
+## Features
 
 - Users can register for an account, then sign in
 - Users can view all the products at once, or filter by category.
