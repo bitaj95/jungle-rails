@@ -2,12 +2,13 @@
 
 A mini e-commerce application built with Rails 4.2 for purposes of teaching Rails by example.
 
-## Additional Steps for Apple M1 Machines
+##Features
 
-1. Make sure that you are runnning Ruby 2.6.6 (`ruby -v`)
-1. Install ImageMagick `brew install imagemagick imagemagick@6 --build-from-source`
-2. Remove Gemfile.lock
-3. Replace Gemfile with version provided [here](https://gist.githubusercontent.com/FrancisBourgouin/831795ae12c4704687a0c2496d91a727/raw/ce8e2104f725f43e56650d404169c7b11c33a5c5/Gemfile)
+- Users can register for an account, then sign in
+- Users can view all the products at once, or filter by category.
+- Users can add or remove products from their cart, then checkout and pay using Stripe.
+- Admin users gain access to a dashboard of the products and categories after username/password authentication
+- Admins users can add/remove products and add categories.
 
 ## Final Product
 
@@ -34,6 +35,13 @@ A mini e-commerce application built with Rails 4.2 for purposes of teaching Rail
 Use Credit Card # 4111 1111 1111 1111 for testing success scenarios.
 
 More information in their docs: <https://stripe.com/docs/testing#cards>
+
+## Additional Steps for Apple M1 Machines
+
+1. Make sure that you are runnning Ruby 2.6.6 (`ruby -v`)
+1. Install ImageMagick `brew install imagemagick imagemagick@6 --build-from-source`
+2. Remove Gemfile.lock
+3. Replace Gemfile with version provided [here](https://gist.githubusercontent.com/FrancisBourgouin/831795ae12c4704687a0c2496d91a727/raw/ce8e2104f725f43e56650d404169c7b11c33a5c5/Gemfile)
 
 ## Dependencies
 
